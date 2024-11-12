@@ -25,8 +25,8 @@ body {
 
 /* From Uiverse.io by Lakshay-art */ 
 .grid {
-    height: 8000px;
-    width: 800px;
+    height: 100%;
+    width: 100%;
     background-image: linear-gradient(to right, #0f0f10 1px, transparent 1px),
       linear-gradient(to bottom, #0f0f10 1px, transparent 1px);
     background-size: 1rem 1rem;
@@ -357,7 +357,9 @@ body {
   }
 
  
-/* From Uiverse.io by vinodjangid07 */ 
+/*
+
+/* From Uiverse.io by vinodjangid07 
 #checkbox {
   display: none;
 }
@@ -388,7 +390,7 @@ body {
 
 /* #checkbox:checked + .toggle .bars {
   margin-left: 13px;
-} */
+} 
 
 #checkbox:checked + .toggle #bar2 {
   transform: translateY(14px) rotate(60deg);
@@ -413,3 +415,66 @@ body {
   transition-duration: .3s;
   transform-origin:right;
 } */
+
+ /* From Uiverse.io by Cevorob */ 
+.burger {
+  position: relative;
+  top: 23px;
+  right: 355px;
+  width: 70px;
+  height: 27px;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+}
+
+.burger input {
+  display: none;
+}
+
+.burger span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.burger span:nth-of-type(1) {
+  top: 0px;
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(2) {
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(3) {
+  top: 100%;
+  transform-origin: left center;
+  transform: translateY(-100%);
+}
+
+.burger input:checked ~ span:nth-of-type(1) {
+  transform: rotate(45deg);
+  top: 0px;
+  left: 5px;
+}
+
+.burger input:checked ~ span:nth-of-type(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.burger input:checked ~ span:nth-of-type(3) {
+  transform: rotate(-45deg);
+  top: 26.5px;
+  left: 5px
+}

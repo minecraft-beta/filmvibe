@@ -486,6 +486,7 @@ body {
 
 /* menuPage */
 .menuPage {
+  position: absolute;
   background-color: #121212;
   height: 750px;
   width: 50%;

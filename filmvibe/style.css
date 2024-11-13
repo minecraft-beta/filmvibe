@@ -526,3 +526,11 @@ body {
   .dropdown:hover .dropdown-content {
     display: block;
   }
+
+
+  .ft1 {
+    color: white;
+    position: fixed;
+    left: 17%;
+    bottom: 1%;
+  }

@@ -2,3 +2,5 @@ undefined
 HELLO 123
 value5
 Minecraft
+pokemon
+[object HTMLInputElement]

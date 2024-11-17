@@ -42,6 +42,7 @@ fs.rename(path1, path2, (err) => {
 
 app.use(express.static(path.join(__dirname, 'admin')));
 
+//dataReceiver post endpoint with 3 var
 app.post('/dataReceiver', upload.single('movieImage'), (req,res) => {
     movieName = req.body.movieName;
     movieDescription = req.body.movieDescription;
@@ -88,7 +89,7 @@ fs.readFile('index.html', 'utf8', (err, data) => {
 
   const divContent = `
   <div id="${movieName}" class="divs">
-   <img class="imgs" src="uploads/${movieImage}"/>
+   <img class="imgs" src="uploads/${movieImage}.png"/>
     <h2 class="hd1">${movieName}</h2>
     <p class="p1">${movieDescription}</p>
     <button class="btn" onclick="window.location.href='${movieName.toLowerCase()}/'">Download</button>
@@ -107,6 +108,7 @@ fs.readFile('index.html', 'utf8', (err, data) => {
 });
 
 
+//dirReceiver post with 6 var
 app.post('/dirReceiver', upload.fields([
   {name: 'image1', maxCount: 1},
   {name: 'image2', maxCount: 1},

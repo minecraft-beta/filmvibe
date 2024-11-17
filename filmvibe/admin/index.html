@@ -6,17 +6,58 @@
   <title>Trigger Fetch</title>
   <style>
     body {
-        background-color: #121212;
+      margin: 0;
+      padding: 0;
+      background-color: #101010;
     }
+    .hd1 {
+      margin-top: 75px;
+      color: white;
+    }
+
+    .hdr {
+      margin: 0;
+      background-color: black;
+      height: 60px;
+      width: 100%;
+      display: flex;
+    }
+
+    .p1 {
+      color: white;
+      transform: translate(50%, 15%);
+    }
+
+    input[type="file"] {
+      color: yellow;
+    }
+
+    .p2 {
+      color: red;
+    }
+
   </style>
 </head>
 <body>
+
+  <header class="hdr"><p class="p1">ADMIN PANEL OF FILMVIBE</p></header>
+
+  <h3 class="hd1">div creator</h3>
   <input type="text" id="movieName" placeholder="movie name"/> <br> <br>
   <input type="text" id="movieDescription" placeholder="movie description"/> <br> <br>
   <input type="file" id="imageInput"/> <br> <br>
-
   <button id="sendButton">Send</button>
 
-  <script src="admin.js"></script>
+  <!-- second -->
+   <h3 class="hd1">directory creator <p class="p2">(make sure movie name is same as above warna bakchodi hogi)</p></h3>
+   <input type="text" id="movieName2" placeholder="movie name"/> <br> <br>
+   <input type="text" id="para1" placeholder="para1"/> <br> <br>
+   <input type="file" id="image1"/> <br> <br>
+   <input type="file" id="image2"/> <br> <br>
+   <input type="file" id="image3"/> <br> <br>
+   <input type="file" id="image4"/> <br> <br>
+   <button id="sendButton2">Send</button>
+
+  <script src="script.js"></script>
 </body>
 </html>

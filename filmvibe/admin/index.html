@@ -24,17 +24,16 @@
     }
 
     .p1 {
-      color: white;
-      transform: translate(50%, 15%);
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 5%);
       color: limegreen;
+      font-weight: 500;
+      font-size: larger;
     }
 
     input[type="file"] {
       color: yellow;
-    }
-
-    .p2 {
-      color: red;
     }
 
   </style>
@@ -42,6 +41,10 @@
 <body>
 
   <header class="hdr"><p class="p1">ADMIN PANEL OF FILMVIBE</p></header>
+
+  
+  <h3 class="hd1">Password</h3>
+  <input type="password" id="psswd" placeholder="password"/>
 
   <h3 class="hd1">div creator</h3>
   <input type="text" id="movieName" placeholder="movie name"/> <br> <br>

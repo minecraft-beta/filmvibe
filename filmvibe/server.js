@@ -47,8 +47,21 @@ app.post('/dataReceiver', upload.fields([
   {name: 'image4', maxCount: 1},
 ]), (req, res) => {
 
-  const movieName = req.body.movieName;
 
+  const psswd = 'psswd69';
+
+  let receivedPsswd = undefined;
+  
+  receivedPsswd = req.body.receivedPsswd;
+
+  console.log(receivedPsswd);
+
+  if (receivedPsswd !== psswd) {
+    res.send('bc');
+    console.log('psswd is incorrect');
+  } else {
+
+  const movieName = req.body.movieName;
 
 if (checkTextInFile(filePath, movieName)) {
   console.log('text found in DB');
@@ -140,6 +153,7 @@ fs.mkdir(movieName.toLowerCase(), (err) => {
 
 //end
 }
+  }
 });
 
 

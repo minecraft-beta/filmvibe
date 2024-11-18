@@ -1,4 +1,5 @@
 document.getElementById('sendButton').addEventListener('click', () => {
+  const psswd = document.getElementById('psswd').value;
   const movieNameValue = document.getElementById('movieName').value;
   const movieDescriptionValue = document.getElementById('movieDescription').value;
   const imageInput = document.getElementById('imageInput');
@@ -14,6 +15,11 @@ document.getElementById('sendButton').addEventListener('click', () => {
   const file2 = image2.files[0];
   const file3 = image3.files[0];
   const file4 = image4.files[0];
+
+  if (!psswd) {
+    alert('enter password');
+    return;
+  }
 
   if (!movieNameValue) {
     alert('movie name is empty');
@@ -58,6 +64,7 @@ document.getElementById('sendButton').addEventListener('click', () => {
 
 
   const formData = new FormData();
+  formData.append('receivedPsswd', psswd);
   formData.append('movieName', movieNameValue);
   formData.append('movieDescription', movieDescriptionValue);
   formData.append('movieImage', file);
@@ -82,6 +89,8 @@ document.getElementById('sendButton').addEventListener('click', () => {
 
       if (data == 'exists') {
         alert('it already exists in db SO FUCK OFF');
+      } else if (data == 'bc') {
+        alert('password is incorrect');
       } else {
         alert('done');
       }

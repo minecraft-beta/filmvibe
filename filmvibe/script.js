@@ -1,16 +1,6 @@
 const burger = document.getElementById('burger');
 const menuPage = document.getElementById('menuPage');
 
-// burger.addEventListener('change', function() {
-//     if (burger.checked) {
-//     menuPage.style.display = 'block';
-//     menuPage.style.transition = 'top 0.5s ease';
-//     } else if (!burger.checked) {
-//         menuPage.style.display = 'none';
-//     }
-// });
-
-
 burger.addEventListener('change', function () {
     if (burger.checked) {
       menuPage.style.display = 'block'; // Make the menu visible

@@ -13,10 +13,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage: storage});
-
-let movieName;
-let movieImage;
-let movieDescription;
 const filePath = './db.txt';
 
 //middlewares
@@ -42,51 +38,60 @@ fs.rename(path1, path2, (err) => {
 
 app.use(express.static(path.join(__dirname, 'admin')));
 
-//dataReceiver post endpoint with 3 var
-app.post('/dataReceiver', upload.single('movieImage'), (req,res) => {
-    movieName = req.body.movieName;
-    movieDescription = req.body.movieDescription;
-    movieImage = req.file.filename;
+//dirReceiver post with 6 var
+app.post('/dataReceiver', upload.fields([
+  {name: 'movieImage', maxCount: 1},
+  {name: 'image1', maxCount: 1},
+  {name: 'image2', maxCount: 1},
+  {name: 'image3', maxCount: 1},
+  {name: 'image4', maxCount: 1},
+]), (req, res) => {
+
+  const movieName = req.body.movieName;
+
+
+if (checkTextInFile(filePath, movieName)) {
+  console.log('text found in DB');
+  res.send('exists');
+ } else {
+
+  res.send('done');
+
+
+  //adding movieName to db
+ fs.appendFile('./db.txt', `\n${movieName}`, (err) => {
+  if (err) {
+      console.error("Error adding to db:", err);
+  } else {
+      console.log("added text to DB");
+  }
+});
+
+  const movieImage = req.files['movieImage'][0].filename;
+  const movieDescription = req.body.movieDescription;
+
+  const para1 = req.body.para1;
+  const image1 = req.files['image1'][0].filename;
+  const image2 = req.files['image2'][0].filename;
+  const image3 = req.files['image3'][0].filename;
+  const image4 = req.files['image4'][0].filename;
+
 
   imgExt(`uploads/${movieImage}`, `uploads/${movieImage}.png`);
+  imgExt(`uploads/${image1}`, `uploads/${image1}.png`);
+  imgExt(`uploads/${image2}`, `uploads/${image2}.png`);
+  imgExt(`uploads/${image3}`, `uploads/${image3}.png`);
+  imgExt(`uploads/${image4}`, `uploads/${image4}.png`);
 
-    // checks if movieName exists in DB
-    const searchText = movieName;
-    console.log(`received data: ${movieName}`);
+ 
 
-if (checkTextInFile(filePath, searchText)) {
-   console.log('text found in DB');
-   res.send('exists');
-} else {
-
-    /* main bakchodi if movieName is new */
-
-    console.log('text not found');
-    res.send('done');
-
-    //adding movieName to db
-   fs.appendFile('./db.txt', `\n${movieName}`, (err) => {
-        if (err) {
-            console.error("Error adding to db:", err);
-        } else {
-            console.log("added text to DB");
-        }
-    });
-
- //create directory with the movieName
- fs.mkdir(movieName.toLowerCase(), (err) => {
-    if (err) {
-      console.error('Error creating directory:', err);
-    } else {
-      console.log('Directory created successfully');
-    }
-  });
+  /* main bakchodi */
 
 
 // Read the file content and adds div to main page
 fs.readFile('index.html', 'utf8', (err, data) => {
   if (err) throw err;
-
+  
   const divContent = `
   <div id="${movieName}" class="divs">
    <img class="imgs" src="uploads/${movieImage}.png"/>
@@ -95,50 +100,27 @@ fs.readFile('index.html', 'utf8', (err, data) => {
     <button class="btn" onclick="window.location.href='${movieName.toLowerCase()}/'">Download</button>
   </div>
   `;
-  const updatedData = data.replace('<script src', `${divContent}\n<script src`);
 
+  const updatedData = data.replace('<script src', `${divContent}\n<script src`);
+  
   fs.writeFile('index.html', updatedData, 'utf8', (err) => {
     if (err) throw err;
     console.log('Div added inside the body!');
   });
+  });
+
+
+//create directory with the movieName
+fs.mkdir(movieName.toLowerCase(), (err) => {
+  if (err) {
+    console.error('Error creating directory:', err);
+  } else {
+    console.log('Directory created successfully');
+  }
 });
-
-}
-
-});
-
-
-//dirReceiver post with 6 var
-app.post('/dirReceiver', upload.fields([
-  {name: 'image1', maxCount: 1},
-  {name: 'image2', maxCount: 1},
-  {name: 'image3', maxCount: 1},
-  {name: 'image4', maxCount: 1},
-]), (req, res) => {
-
-  const movieName2 = req.body.movieName2;
-  const para1 = req.body.para1;
-  const image1 = req.files['image1'][0].filename;
-  const image2 = req.files['image2'][0].filename;
-  const image3 = req.files['image3'][0].filename;
-  const image4 = req.files['image4'][0].filename;
-
-  imgExt(`uploads/${image1}`, `uploads/${image1}.png`);
-  imgExt(`uploads/${image2}`, `uploads/${image2}.png`);
-  imgExt(`uploads/${image3}`, `uploads/${image3}.png`);
-  imgExt(`uploads/${image4}`, `uploads/${image4}.png`);
-
-  
-if (checkTextInFile(filePath, movieName2)) {
-  console.log('text found in DB');
-  res.send('valid');
-
-  /* main bakchodi */
-
-  console.log(para1);
 
   //create index.html in the dir of movieName
-  fs.writeFile(`${movieName2.toLowerCase()}/index.html`, `
+  fs.writeFile(`${movieName.toLowerCase()}/index.html`, `
   
   html content
   
@@ -155,11 +137,10 @@ if (checkTextInFile(filePath, movieName2)) {
     }
 });
 
-} else {
-  res.send('notValid');
-}
 
-})
+//end
+}
+});
 
 
 app.listen(PORT, () => {

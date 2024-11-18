@@ -17,4 +17,35 @@ burger.addEventListener('change', function () {
     }
   });
   
+  const searchIcon = document.getElementById('search-icon');
+  const filterIcon = document.getElementById('filter-icon');
+  const divs = document.getElementsByClassName('divs');
+  
+  searchIcon.onclick = () => {
+    let i = 0;
+    while (i < divs.length) {
+      divs[i].style.display = 'none';
+      i++;
+    }
+  };
 
+  filterIcon.onclick = () => {
+  const searchBarValue = document.getElementById('searchBar').value;
+    let i = 0;
+    while (i < divs.length) {
+      divs[i].style.display = 'none';
+      i++;
+    }
+      const searcher = document.getElementById(`${searchBarValue}`);
+
+      console.log(searchBarValue);
+      console.log(searcher);
+
+      if (searcher) {
+
+        searcher.style.display = 'block';
+
+      } else {
+        alert('no results');
+      }
+  };

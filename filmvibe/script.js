@@ -22,15 +22,12 @@ burger.addEventListener('change', function () {
   const divs = document.getElementsByClassName('divs');
   
   searchIcon.onclick = () => {
-    let i = 0;
-    while (i < divs.length) {
-      divs[i].style.display = 'none';
-      i++;
-    }
-  };
+    const searchBarValue = document.getElementById('searchBar').value;
+    
+  if (!searchBarValue) {
+    console.log('nothing');
+  } else {
 
-  filterIcon.onclick = () => {
-  const searchBarValue = document.getElementById('searchBar').value;
     let i = 0;
     while (i < divs.length) {
       divs[i].style.display = 'none';
@@ -48,4 +45,32 @@ burger.addEventListener('change', function () {
       } else {
         alert('no results');
       }
+  }
+  };
+
+  filterIcon.onclick = () => {
+  const searchBarValue = document.getElementById('searchBar').value;
+
+  if (!searchBarValue) {
+    console.log('nothing');
+  } else {
+
+    let i = 0;
+    while (i < divs.length) {
+      divs[i].style.display = 'none';
+      i++;
+    }
+      const searcher = document.getElementById(`${searchBarValue}`);
+
+      console.log(searchBarValue);
+      console.log(searcher);
+
+      if (searcher) {
+
+        searcher.style.display = 'block';
+
+      } else {
+        alert('no results');
+      }
+  }
   };

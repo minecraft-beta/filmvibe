@@ -48,7 +48,9 @@ burger.addEventListener('change', function () {
   }
   };
 
+
   filterIcon.onclick = () => {
+
   const searchBarValue = document.getElementById('searchBar').value;
 
   if (!searchBarValue) {
@@ -74,3 +76,37 @@ burger.addEventListener('change', function () {
       }
   }
   };
+
+
+  //searchBar enter key
+const searchBar = document.getElementById('searchBar');
+
+searchBar.addEventListener("keydown", (event) => {
+  if (event.key == 'Enter') {
+   
+  const searchBarValue = document.getElementById('searchBar').value;
+
+  if (!searchBarValue) {
+    console.log('nothing');
+  } else {
+
+    let i = 0;
+    while (i < divs.length) {
+      divs[i].style.display = 'none';
+      i++;
+    }
+      const searcher = document.getElementById(`${searchBarValue}`);
+
+      console.log(searchBarValue);
+      console.log(searcher);
+
+      if (searcher) {
+
+        searcher.style.display = 'block';
+
+      } else {
+        alert('no results');
+      }
+  }
+  }
+})

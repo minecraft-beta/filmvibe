@@ -100,3 +100,54 @@ document.getElementById('sendButton').addEventListener('click', () => {
       console.error(error);
     });
 });
+
+document.getElementById('sendButton2').addEventListener('click', () => {
+
+const psswd2 = document.getElementById('psswd2').value;
+const movieName2 = document.getElementById('movieName2').value;
+
+console.log(psswd2);
+
+/* for multipart */
+// const formData = new FormData();
+// formData.append('psswd2', psswd2);
+// formData.append('movieName', movieName2);
+
+const jsonData =
+{
+  "psswd2": psswd2,
+  "movieName": movieName2
+}  // this a js obj aka JSO,
+//keys can be unquoted but values cant (if str deps on data type)
+// but JSON cant be unquoted
+
+fetch('/dataDeleter', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(jsonData) // this js obj notation aka JSON
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.text();
+  })
+  .then(data => {
+    console.log(data);
+
+    if (data == 'dirNotExist') {
+      alert('it does not exist so not removed');
+    } else if (data == 'bc') {
+      alert('password is incorrect');
+    } else if (data == 'done') {
+      alert('done');
+    }
+
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+})

@@ -15,6 +15,8 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 const filePath = './db.txt';
 
+const psswd = 'psswd69';
+
 //middlewares
 app.use(cors());
 app.use(express.json());
@@ -47,9 +49,6 @@ app.post('/dataReceiver', upload.fields([
   {name: 'image4', maxCount: 1},
 ]), (req, res) => {
 
-
-  const psswd = 'psswd69';
-
   let receivedPsswd = undefined;
   
   receivedPsswd = req.body.receivedPsswd;
@@ -62,8 +61,9 @@ app.post('/dataReceiver', upload.fields([
   } else {
 
   const movieName = req.body.movieName;
+  const searchText = `"${movieName}"`;
 
-if (checkTextInFile(filePath, movieName)) {
+if (checkTextInFile(filePath, searchText)) {
   console.log('text found in DB');
   res.send('exists');
  } else {
@@ -72,7 +72,7 @@ if (checkTextInFile(filePath, movieName)) {
 
 
   //adding movieName to db
- fs.appendFile('./db.txt', `\n${movieName}`, (err) => {
+ fs.appendFile('./db.txt', `\n"${movieName}"`, (err) => {
   if (err) {
       console.error("Error adding to db:", err);
   } else {
@@ -153,6 +153,75 @@ fs.mkdir(movieName.toLowerCase(), (err) => {
 
 //end
 }
+  }
+});
+
+let dirChecker;
+
+function checkDirectoryExists(directoryPath) {
+  if (fs.existsSync(directoryPath)) { // Check if the path exists
+    const stats = fs.lstatSync(directoryPath); // Get the stats of the path
+    if (stats.isDirectory()) {
+      console.log('Directory exists');
+      dirChecker = 'yes';
+    } else {
+      console.log('Path exists but is not a directory');
+      dirChecker = 'no';
+    }
+  } else {
+    console.log('Directory does not exist');
+    dirChecker = 'no';
+  }
+}
+
+
+app.post('/dataDeleter', (req, res) => {
+  
+  let psswd2 = undefined;
+  
+  psswd2 = req.body.psswd2;
+  const movieName = req.body.movieName;
+
+  console.log(`psswd: ${psswd2}`);
+
+  if (psswd2 !== psswd) {
+    res.send('bc');
+    console.log('psswd is incorrect');
+  } else {
+    //main bkchodi
+
+  const directoryPath = path.join(__dirname, movieName);
+  checkDirectoryExists(directoryPath);
+
+    fs.rm(movieName, { recursive: true, force: true }, (err) => {
+      if (err) {
+        console.error("Error deleting", err);
+    } else if (dirChecker == 'no') {
+        res.send('dirNotExist');
+    } else {
+
+
+// Read the file content and removes div from main page
+fs.readFile('index.html', 'utf8', (err, data) => {
+  if (err) throw err;
+
+
+  const updatedData = data.replace(`id="${movieName}" class="divs"`, `id="${movieName}" class="d-none"`);
+  
+  fs.writeFile('index.html', updatedData, 'utf8', (err) => {
+    if (err) throw err;
+    console.log('Div rm done');
+  });
+  });
+
+      console.log('deleted dir');
+      res.send('done');
+    }
+   });
+
+
+
+
   }
 });
 

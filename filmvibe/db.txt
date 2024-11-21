@@ -1,10 +1,4 @@
 undefined
-HELLO 123
-value5
-Minecraft
-pokemon
-[object HTMLInputElement]
-test123
-test space
-hdhd
-hdhdhd
+"undefined"
+
+"orion"

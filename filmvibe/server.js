@@ -214,6 +214,18 @@ fs.readFile('index.html', 'utf8', (err, data) => {
   });
   });
 
+// Read the file content and removes movieName from DB
+fs.readFile(filePath, 'utf8', (err, data) => {
+  if (err) throw err;
+  
+  const updatedData2 = data.replace(`"${movieName}"`, `null`);
+  
+  fs.writeFile(filePath, updatedData2, 'utf8', (err) => {
+    if (err) throw err;
+    console.log('movieName del from DB');
+  });
+  });
+
       console.log('deleted dir');
       res.send('done');
     }

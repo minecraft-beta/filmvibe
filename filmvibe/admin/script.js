@@ -2,6 +2,7 @@ document.getElementById('sendButton').addEventListener('click', () => {
   const psswd = document.getElementById('psswd').value;
   const movieNameValue = document.getElementById('movieName').value;
   const movieDescriptionValue = document.getElementById('movieDescription').value;
+  const movieLinkValue = document.getElementById('movieLink').value;
   const imageInput = document.getElementById('imageInput');
   const para1 = document.getElementById('para1').value;
   const image1 = document.getElementById('image1');
@@ -41,6 +42,11 @@ document.getElementById('sendButton').addEventListener('click', () => {
     return;
   }
 
+  if (!movieLinkValue) {
+    alert('movie link is empty');
+    return;
+  }
+
   if (!file1) {
     alert('Please select file1');
     return;
@@ -63,12 +69,15 @@ document.getElementById('sendButton').addEventListener('click', () => {
   }
 
 
+
+
   const formData = new FormData();
   formData.append('receivedPsswd', psswd);
   formData.append('movieName', movieNameValue);
   formData.append('movieDescription', movieDescriptionValue);
   formData.append('movieImage', file);
   formData.append('para1', para1);
+  formData.append('movieLink', movieLinkValue);
   formData.append('image1', file1);
   formData.append('image2', file2);
   formData.append('image3', file3);

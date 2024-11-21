@@ -84,6 +84,7 @@ if (checkTextInFile(filePath, searchText)) {
   const movieDescription = req.body.movieDescription;
 
   const para1 = req.body.para1;
+  const movieLink = req.body.movieLink;
   const image1 = req.files['image1'][0].filename;
   const image2 = req.files['image2'][0].filename;
   const image3 = req.files['image3'][0].filename;
@@ -217,8 +218,8 @@ fs.mkdir(movieName.toLowerCase(), (err) => {
     <img class="img" src="../images/text.png"/>
     </header>
 
-    <img id="${movieImage}" class="imgOne" src="../uploads/${movieImage}.png"/> 
-    <p id="${movieName}" class="pOne">${movieName}</p>
+    <img class="imgOne" src="../uploads/${movieImage}.png"/> 
+    <p class="pOne">${movieName}</p>
 
     <h3 class="hdOne">Description:</h3>
     <p class="pTwo"> ${para1} </p>
@@ -230,7 +231,7 @@ fs.mkdir(movieName.toLowerCase(), (err) => {
     <img class="imgss" src="../uploads/${image4}.png"/>
 
     <h3 class="hdOne">Download Link:</h3>
-    <button class="btnOne" id="btnLink" onclick="window.location.href='/download'"> Download </button>
+    <button class="btnOne" id="btnLink" onclick="window.location.href='${movieLink}'"> Download </button>
 
 </body>
 

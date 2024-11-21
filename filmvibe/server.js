@@ -135,14 +135,109 @@ fs.mkdir(movieName.toLowerCase(), (err) => {
   //create index.html in the dir of movieName
   fs.writeFile(`${movieName.toLowerCase()}/index.html`, `
   
-  html content
-  
-   para1: ${para1}
-   image1:
-   <img src="../uploads/${image1}.png"/>
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+}
 
 
-    `, (err) => {
+.header1 {
+    background-color: #000000;
+    height: 75px;
+    width: 100% auto;
+    display: flex;
+}
+
+.img {
+    margin: 0;
+    height: 75px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    pointer-events: none;
+}
+
+/* */
+
+.pOne {
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 220px;
+}
+
+.imgOne {
+    height: 160px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 30px;
+}
+
+.pTwo {
+    color: white;
+}
+
+.hdOne {
+    margin-top: 60px;
+    color: red;
+}
+
+.imgss {
+    height: 140px;
+}
+
+.btnOne {
+    background-color: yellow;
+    border-style: none;
+    color: black;
+    height: 30px;
+    width: 90px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header1">
+    <img class="img" src="../images/text.png"/>
+    </header>
+
+    <img id="${movieImage}" class="imgOne" src="../uploads/${movieImage}.png"/> 
+    <p id="${movieName}" class="pOne">${movieName}</p>
+
+    <h3 class="hdOne">Description:</h3>
+    <p class="pTwo"> ${para1} </p>
+
+    <h3 class="hdOne">Screenshots:</h3>
+    <img class="imgss" src="../uploads/${image1}.png"/>
+    <img class="imgss" src="../uploads/${image2}.png"/>
+    <img class="imgss" src="../uploads/${image3}.png"/>
+    <img class="imgss" src="../uploads/${image4}.png"/>
+
+    <h3 class="hdOne">Download Link:</h3>
+    <button class="btnOne" id="btnLink" onclick="window.location.href='/download'"> Download </button>
+
+</body>
+
+</html>
+
+
+    `, {recursive: true},(err) => {
     if (err) {
         console.error("Error creating dir/index.html:", err);
     } else {

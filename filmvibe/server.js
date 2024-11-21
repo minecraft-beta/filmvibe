@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage: storage});
-const filePath = './db.txt';
+const filePath = './DB.txt';
 
 const psswd = 'psswd69';
 
@@ -72,7 +72,7 @@ if (checkTextInFile(filePath, searchText)) {
 
 
   //adding movieName to db
- fs.appendFile('./db.txt', `\n"${movieName}"`, (err) => {
+ fs.appendFile(filePath, `\n"${movieName}"`, (err) => {
   if (err) {
       console.error("Error adding to db:", err);
   } else {

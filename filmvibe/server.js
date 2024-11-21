@@ -3,7 +3,6 @@ const app = express();
 const PORT = 6969;
 const fs = require('fs');
 const path = require('path');
-const cors = require('cors');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -18,7 +17,6 @@ const filePath = './DB.txt';
 const psswd = 'psswd69';
 
 //middlewares
-app.use(cors());
 app.use(express.json());
 
 // DB search function

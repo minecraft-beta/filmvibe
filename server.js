@@ -4,6 +4,8 @@ const PORT = 6969;
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
+const simpleGit = require('simple-git');
+const git = simpleGit();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -18,6 +20,18 @@ const psswd = 'psswd69';
 
 //middlewares
 app.use(express.json());
+
+//git
+async function pushChanges() {
+  try {
+    await git.add('./*'); // Stage all changes
+    await git.commit('Automated commit'); // Commit the changes
+    await git.push('origin', 'main'); // Push to the `main` branch
+    console.log('Changes pushed to GitHub successfully!');
+  } catch (error) {
+    console.error('Error during Git push:', error.message);
+  }
+}
 
 // DB search function
 function checkTextInFile(filePath, searchText) {
@@ -38,7 +52,7 @@ fs.rename(path1, path2, (err) => {
 
 app.use(express.static(path.join(__dirname, 'admin')));
 
-//dirReceiver post with 6 var
+//dirReceiver post with 7 var
 app.post('/dataReceiver', upload.fields([
   {name: 'movieImage', maxCount: 1},
   {name: 'image1', maxCount: 1},
@@ -65,6 +79,8 @@ if (checkTextInFile(filePath, searchText)) {
   console.log('text found in DB');
   res.send('exists');
  } else {
+
+    //main bakchodi
 
   res.send('done');
 
@@ -244,6 +260,7 @@ fs.mkdir(movieName.toLowerCase(), (err) => {
     }
 });
 
+    pushChanges();
 
 //end
 }
@@ -326,6 +343,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
    });
 
 
+      pushChanges();
 
 
   }

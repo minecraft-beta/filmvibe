@@ -24,7 +24,11 @@ app.use(express.json());
 //git
 async function pushChanges() {
   try {
-    await git.add('./*'); // Stage all changes
+    // Add all files, including new directories and index.html
+    await git.add('./uploads/*'); // Stage all files in the uploads directory
+    await git.add('./index.html'); // Explicitly add index.html
+    await git.add('./*/index.html'); // Add any new index.html files created in movieName directories
+    
     await git.commit('Automated commit'); // Commit the changes
     await git.push('origin', 'main'); // Push to the `main` branch
     console.log('Changes pushed to GitHub successfully!');

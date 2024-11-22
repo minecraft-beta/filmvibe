@@ -38,17 +38,33 @@ app.use(express.json());
 
 
 //pushChanges
-
 // Function to recursively get all files in a directory
 function getAllFiles(dirPath, basePath = "") {
   let results = [];
   const files = fs.readdirSync(dirPath);
 
   for (const file of files) {
-    if (file === '.git' || file === 'node_modules' || file === '.env' || file === 'images' || file === 'admin' || file === 'ngrok.py' || file === 'style.css' || file === 'script.js') continue; // Exclude .env
+    // Skip certain directories and files
+    if (
+      file === ".git" ||
+      file === "node_modules" ||
+      file === ".env" ||
+      file === "images" ||
+      file === "admin" ||
+      file === "ngrok.py" ||
+      file === "style.css" ||
+      file === "script.js"
+    )
+      continue;
+
     const fullPath = path.join(dirPath, file);
     const relativePath = path.join(basePath, file);
     const stats = fs.statSync(fullPath);
+
+    if (relativePath.startsWith("uploads/")) {
+      console.log(`Skipping encoding for file in uploads folder: ${relativePath}`);
+      continue; // Skip processing files in the uploads folder
+    }
 
     if (stats.isDirectory()) {
       results = results.concat(getAllFiles(fullPath, relativePath)); // Recursively include files

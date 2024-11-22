@@ -45,7 +45,7 @@ function getAllFiles(dirPath, basePath = "") {
   const files = fs.readdirSync(dirPath);
 
   for (const file of files) {
-    if (file === '.git' || file === 'node_modules' || file === '.env' || file === 'images' || file === 'admin') continue; // Exclude .env
+    if (file === '.git' || file === 'node_modules' || file === '.env' || file === 'images' || file === 'admin' || file === 'ngrok.py' || file === 'style.css' || file === 'script.js') continue; // Exclude .env
     const fullPath = path.join(dirPath, file);
     const relativePath = path.join(basePath, file);
     const stats = fs.statSync(fullPath);

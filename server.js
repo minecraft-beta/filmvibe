@@ -25,6 +25,7 @@ app.use(express.json());
 async function pushChanges() {
   try {
     // Add all files, including new directories and index.html
+    await git.add('./DB.txt');  
     await git.add('./uploads/*'); // Stage all files in the uploads directory
     await git.add('./index.html'); // Explicitly add index.html
     await git.add('./*/index.html'); // Add any new index.html files created in movieName directories

@@ -1,105 +1,240 @@
-
-  
  <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-
-    body {
-    margin: 0;
-    padding: 0;
-    background-color: #121212;
-}
-
-
-.header1 {
-    background-color: #000000;
-    height: 75px;
-    width: 100% auto;
-    display: flex;
-}
-
-.img {
-    margin: 0;
-    height: 75px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-    pointer-events: none;
-}
-
-/* */
-
-.pOne {
-    color: white;
-    font-size: 25px;
-    text-align: center;
-    margin-top: 220px;
-}
-
-.imgOne {
-    height: 160px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    margin-top: 30px;
-}
-
-.pTwo {
-    color: white;
-}
-
-.hdOne {
-    margin-top: 60px;
-    color: red;
-}
-
-.imgss {
-    height: 140px;
-}
-
-.btnOne {
-    background-color: yellow;
-    border-style: none;
-    color: black;
-    height: 30px;
-    width: 90px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-}
-
-    </style>
+    <link rel="icon" href="images/logo.ico"/>
+    <link rel="stylesheet" href="style.css"/>
+    <title>Film Vibe</title>
 </head>
-
 <body>
 
+
     <header class="header1">
-    <img class="img" src="../images/text.png"/>
+        <img class="img1" src="images/text.png"/>
+    
+
+<label class="burger" for="burger">
+  <input type="checkbox" id="burger">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
+
+
     </header>
 
-    <img class="imgOne" src="../uploads/d67a06c262ad47a13ac773b7a42adc6f.png"/> 
-    <p class="pOne">test123</p>
 
-    <h3 class="hdOne">Description:</h3>
-    <p class="pTwo"> hesh </p>
+     <div id="menuPage" class="menuPage">
 
-    <h3 class="hdOne">Screenshots:</h3>
-    <img class="imgss" src="../uploads/8af3846f9c7b00b0ac1540a2acd8f28b.png"/>
-    <img class="imgss" src="../uploads/e52377d0ad8dbf12ac5ec8e9a27d470b.png"/>
-    <img class="imgss" src="../uploads/afc2ab47ff620d695d04db0b0c3f67d6.png"/>
-    <img class="imgss" src="../uploads/14811cdd0c4ce27c747e9fbfe2884ee0.png"/>
 
-    <h3 class="hdOne">Download Link:</h3>
-    <button class="btnOne" id="btnLink" onclick="window.location.href='hshsh'"> Download </button>
+      <!-- backchodi -->
 
+      <div class="dropdown">
+        <button>Dropdown</button>
+        <div class="dropdown-content">
+          <a href="#" id="option1">Option 1</a>
+          <a href="#" id="option2">Option 2</a>
+          <a href="#" id="option3">Option 3</a>
+        </div>
+      </div>
+
+<!--  -->
+
+      <footer class="ft1"> FilmVibe 2024 © </footer>
+
+     </div>
+
+
+
+<div class="space1"></div>
+
+<div class="grid"></div>
+<div id="poda">
+  <div class="glow"></div>
+  <div class="darkBorderBg"></div>
+  <div class="darkBorderBg"></div>
+  <div class="darkBorderBg"></div>
+
+  <div class="white"></div>
+
+  <div class="border"></div>
+
+  <div id="main">
+    <input id="searchBar" placeholder="Search..." type="text" name="text" class="input" />
+    <div id="input-mask"></div>
+    <div id="pink-mask"></div>
+    <div class="filterBorder"></div>
+    <div id="filter-icon">
+      <svg
+        preserveAspectRatio="none"
+        height="27"
+        width="27"
+        viewBox="4.8 4.56 14.832 15.408"
+        fill="none"
+      >
+        <path
+          d="M8.16 6.65002H15.83C16.47 6.65002 16.99 7.17002 16.99 7.81002V9.09002C16.99 9.56002 16.7 10.14 16.41 10.43L13.91 12.64C13.56 12.93 13.33 13.51 13.33 13.98V16.48C13.33 16.83 13.1 17.29 12.81 17.47L12 17.98C11.24 18.45 10.2 17.92 10.2 16.99V13.91C10.2 13.5 9.97 12.98 9.73 12.69L7.52 10.36C7.23 10.08 7 9.55002 7 9.20002V7.87002C7 7.17002 7.52 6.65002 8.16 6.65002Z"
+          stroke="#d6d6e6"
+          stroke-width="1"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </svg>
+    </div>
+    <div id="search-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        height="24"
+        fill="none"
+        class="feather feather-search"
+      >
+        <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
+        <line
+          stroke="url(#searchl)"
+          y2="16.65"
+          y1="22"
+          x2="16.65"
+          x1="22"
+        ></line>
+        <defs>
+          <linearGradient gradientTransform="rotate(50)" id="search">
+            <stop stop-color="#f8e7f8" offset="0%"></stop>
+            <stop stop-color="#b6a9b7" offset="50%"></stop>
+          </linearGradient>
+          <linearGradient id="searchl">
+            <stop stop-color="#b6a9b7" offset="0%"></stop>
+            <stop stop-color="#837484" offset="50%"></stop>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</div>
+
+  
+<div id="testinoktest" class="divs">
+  <img class="imgs" src="uploads/logo.png"/>
+  <h2 class="hd1">Filmvibe</h2>
+  <p class="p1"> this is the logo owned and copyrighted by filmvibe</p>
+ </div>
+
+<div id="value5" class="divs">
+ <img class="imgs" src="uploads/text.png"/>
+  <h2 class="hd1">value5</h2>
+   <p class="p1">xdxdxd</p>
+</div>
+  
+
+  <div id="test 1" class="divs">
+   <img class="imgs" src="uploads/6b98656b5a8b1a4ef838dd57960621ea.png"/>
+    <h2 class="hd1">test 1</h2>
+    <p class="p1">vhggg</p>
+    <button class="btn" onclick="window.location.href='test 1/'">Download</button>
+  </div>
+  
+
+  <div id="test 2" class="divs">
+   <img class="imgs" src="uploads/8a90f01dd0942dd2212292517b5c57e4.png"/>
+    <h2 class="hd1">test 2</h2>
+    <p class="p1">vhggg</p>
+    <button class="btn" onclick="window.location.href='test 2/'">Download</button>
+  </div>
+  
+
+  <div id="test 3" class="divs">
+   <img class="imgs" src="uploads/57dafabb2a590cfdfd0388b52ca701dd.png"/>
+    <h2 class="hd1">test 3</h2>
+    <p class="p1">vhggg</p>
+    <button class="btn" onclick="window.location.href='test 3/'">Download</button>
+  </div>
+  
+
+  <div id="test 2" class="divs">
+   <img class="imgs" src="uploads/6ecb33bb7d533597723887c9798d1df0.png"/>
+    <h2 class="hd1">test 2</h2>
+    <p class="p1">ghhggg</p>
+    <button class="btn" onclick="window.location.href='test 2/'">Download</button>
+  </div>
+  
+
+  <div id="test 3" class="divs">
+   <img class="imgs" src="uploads/c10eacae03acbbf32c9b247c27f78c44.png"/>
+    <h2 class="hd1">test 3</h2>
+    <p class="p1">ghhggg</p>
+    <button class="btn" onclick="window.location.href='test 3/'">Download</button>
+  </div>
+  
+
+  <div id="test 4" class="divs">
+   <img class="imgs" src="uploads/d788a762733ce1dd782d3af9864c1ab0.png"/>
+    <h2 class="hd1">test 4</h2>
+    <p class="p1">ghhggg</p>
+    <button class="btn" onclick="window.location.href='test 4/'">Download</button>
+  </div>
+  
+
+  <div id="test 5" class="divs">
+   <img class="imgs" src="uploads/d14cbb87b0b872f73c635e46c45867b3.png"/>
+    <h2 class="hd1">test 5</h2>
+    <p class="p1">ghhggg</p>
+    <button class="btn" onclick="window.location.href='test 5/'">Download</button>
+  </div>
+  
+
+  <div id="test 0" class="divs">
+   <img class="imgs" src="uploads/5508f2f10eddece02d60b86ee2d92258.png"/>
+    <h2 class="hd1">test 0</h2>
+    <p class="p1">gggg</p>
+    <button class="btn" onclick="window.location.href='test 0/'">Download</button>
+  </div>
+  
+
+  <div id="test bc" class="divs">
+   <img class="imgs" src="uploads/7f2a50f982389616bc6c88b023d981bb.png"/>
+    <h2 class="hd1">test bc</h2>
+    <p class="p1">hdhdh</p>
+    <button class="btn" onclick="window.location.href='test bc/'">Download</button>
+  </div>
+  
+
+  <div id="test bc2" class="divs">
+   <img class="imgs" src="uploads/332ef1645f9743e78c375ea530ac1477.png"/>
+    <h2 class="hd1">test bc2</h2>
+    <p class="p1">hdhdh</p>
+    <button class="btn" onclick="window.location.href='test bc2/'">Download</button>
+  </div>
+  
+
+  <div id="test123" class="divs">
+   <img class="imgs" src="uploads/d67a06c262ad47a13ac773b7a42adc6f.png"/>
+    <h2 class="hd1">test123</h2>
+    <p class="p1">hdhdh</p>
+    <button class="btn" onclick="window.location.href='test123/'">Download</button>
+  </div>
+  
+
+  <div id="test12" class="divs">
+   <img class="imgs" src="uploads/4e5ab0eed55060c788475c2c42c27fa1.png"/>
+    <h2 class="hd1">test12</h2>
+    <p class="p1">hdhdh</p>
+    <button class="btn" onclick="window.location.href='test12/'">Download</button>
+  </div>
+  
+
+  <div id="test00" class="divs">
+   <img class="imgs" src="uploads/7fba5b76954453813316f46b9d4c59cf.png"/>
+    <h2 class="hd1">test00</h2>
+    <p class="p1">hdhdh</p>
+    <button class="btn" onclick="window.location.href='test00/'">Download</button>
+  </div>
+  
+<script src="script.js"></script>
 </body>
-
 </html>
-
-
-    

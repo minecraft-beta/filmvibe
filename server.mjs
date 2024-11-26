@@ -4,8 +4,6 @@ const PORT = 6969;
 import fs from 'fs';
 import path from 'path';
 import multer from 'multer';
-//const simpleGit = require('simple-git');
-//const git = simpleGit();
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -36,139 +34,13 @@ const psswd = 'psswd69';
 app.use(express.json());
 
 
-
-
-
-// //pushChanges
-// // Function to recursively get all files in a directory
-// function getAllFiles(dirPath, basePath = "") {
-//   let results = [];
-//   const files = fs.readdirSync(dirPath);
-
-//   for (const file of files) {
-//     // Skip certain directories and files
-//     if (
-//       file === ".git" ||
-//       file === "node_modules" ||
-//       file === ".env" ||
-//       file === "images" ||
-//       file === "admin" ||
-//       file === "ngrok.py" ||
-//       file === "style.css" ||
-//       file === "script.js"
-//     )
-//       continue;
-
-//     const fullPath = path.join(dirPath, file);
-//     const relativePath = path.join(basePath, file);
-//     const stats = fs.statSync(fullPath);
-
-//     if (relativePath.startsWith("uploads/")) {
-//       console.log(`Skipping encoding for file in uploads folder: ${relativePath}`);
-//       continue; // Skip processing files in the uploads folder
-//     }
-
-//     if (stats.isDirectory()) {
-//       results = results.concat(getAllFiles(fullPath, relativePath)); // Recursively include files
-//     } else {
-//       results.push({ path: relativePath, localPath: fullPath });
-//     }
-//   }
-
-//   return results;
-// }
-
-
-// async function pushChanges() {
-//   try {
-//     const owner = "minecraft-beta"; // Replace with your GitHub username
-//     const repo = "filmvibe"; // Replace with your repository name
-//     const branch = "main"; // Replace with your branch name if different
-
-//     // Collect all files (including those in newly created directories)
-//     const rootDir = __dirname; // Adjust if needed
-//     const files = getAllFiles(rootDir);
-
-//     for (const file of files) {
-//       // Read the local file content
-//       const localContent = fs.readFileSync(file.localPath, "utf-8");
-//       const localContentEncoded = Buffer.from(localContent).toString("base64");
-
-//       let remoteSha = null;
-//       let remoteContent = null;
-
-//       try {
-//         // Get the SHA and content of the existing file on GitHub
-//         const { data } = await octokit.rest.repos.getContent({
-//           owner,
-//           repo,
-//           path: file.path,
-//           ref: branch,
-//         });
-
-//         remoteSha = data.sha;
-//         remoteContent = data.content.replace(/\n/g, ""); // Remove line breaks from GitHub's base64 content
-//       } catch (err) {
-//         if (err.status !== 404) throw err; // Ignore file-not-found errors
-//       }
-
-//       // Compare local and remote content
-//       if (remoteContent && remoteContent === localContentEncoded) {
-//         console.log(`Skipping unchanged file: ${file.path}`);
-//         continue; // Skip this file if the content hasn't changed
-//       }
-
-//       // Create or update the file in the repository
-//       await octokit.rest.repos.createOrUpdateFileContents({
-//         owner,
-//         repo,
-//         path: file.path,
-//         message: `Update ${file.path}`,
-//         content: localContentEncoded,
-//         sha: remoteSha, // Only include SHA if the file already exists
-//         branch,
-//       });
-
-//       console.log(`Updated file: ${file.path}`);
-//     }
-
-//     console.log("Changes pushed to GitHub successfully!");
-//   } catch (error) {
-//     console.error("Error during Git push:", error.message);
-//   }
-// }
-
-
-
-
-/*
-//git
-async function pushChanges() {
-  try {
-    // Add all files, including new directories and index.html
-    await git.add('./DB.txt');  
-    await git.add('./uploads/*'); // Stage all files in the uploads directory
-    await git.add('./index.html'); // Explicitly add index.html
-*/ //  await git.add('./*/index.html'); // Add any new index.html files created in movieName directories  
-
-  /*  await git.commit('Automated commit'); // Commit the changes
-    await git.push('origin', 'main'); // Push to the `main` branch
-    console.log('Changes pushed to GitHub successfully!');
-  } catch (error) {
-    console.error('Error during Git push:', error.message);
-  }
-}
-*/
-
-
-
+//pushChanges
 const OWNER = "minecraft-beta";  // GitHub username or organization
 const REPO = "filmvibe"; // Repository name
 const BRANCH = "main";          // Branch to commit to
 
 
-
-async function pushChangesSequentially(filePaths, commitMessage) {
+async function pushChanges(filePaths, commitMessage) {
   for (const filePath of filePaths) {
     try {
       // 1. Determine file type (image or text)
@@ -217,59 +89,6 @@ async function pushChangesSequentially(filePaths, commitMessage) {
     }
   }
 }
-
-
-
-
-// async function pushChanges(filePath, commitMessage) {
-//   try {
-//     // 1. Determine file type (image or text)
-//     const fileExtension = path.extname(filePath).toLowerCase();
-//     const isImage = [".png", ".jpg", ".jpeg", ".gif"].includes(fileExtension);
-
-//     // 2. Read the file content
-//     const fileContent = isImage
-//       ? fs.readFileSync(filePath) // Read binary data for images
-//       : fs.readFileSync(filePath, "utf8"); // Read text data for other files
-
-//     const base64Content = Buffer.from(fileContent).toString("base64");
-
-//     // 3. Get the file SHA (required for updating files)
-//     let fileSHA;
-//     try {
-//       const { data } = await octokit.repos.getContent({
-//         owner: OWNER,
-//         repo: REPO,
-//         path: path.basename(filePath),
-//         ref: BRANCH,
-//       });
-//       fileSHA = data.sha;
-//     } catch (error) {
-//       if (error.status === 404) {
-//         console.log("File does not exist, it will be created.");
-//       } else {
-//         throw error;
-//       }
-//     }
-
-//     // 4. Create or update the file
-//     await octokit.repos.createOrUpdateFileContents({
-//       owner: OWNER,
-//       repo: REPO,
-//       path: path.basename(filePath),
-//       message: commitMessage,
-//       content: base64Content,
-//       branch: BRANCH,
-//       sha: fileSHA, // Include SHA if file exists
-//     });
-
-//     console.log("File committed and pushed successfully!");
-//   } catch (error) {
-//     console.error("Error pushing changes:", error.message);
-//   }
-// }
-
-
 
 
 
@@ -517,7 +336,7 @@ const filePaths = [
   'index.html'
 ];
 
-pushChangesSequentially(filePaths, "Automated commit");
+pushChanges(filePaths, "Automated commit");
 
 
 //end

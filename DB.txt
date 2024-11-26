@@ -7,3 +7,5 @@ null
 "test 4"
 "test 5"
 "test 0"
+"test bc"
+"test bc2"

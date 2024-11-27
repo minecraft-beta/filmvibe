@@ -40,21 +40,19 @@ const REPO = "filmvibe"; // Repository name
 const BRANCH = "main";          // Branch to commit to
 
 
-async function pushChanges(filePaths, commitMessage) {
+
+
+async function pushChanges(filePaths = [], commitMessage, deletedPaths = []) {
+  // Process file updates or creations
   for (const filePath of filePaths) {
     try {
-      // 1. Determine file type (image or text)
       const fileExtension = path.extname(filePath).toLowerCase();
       const isImage = [".png", ".jpg", ".jpeg", ".gif"].includes(fileExtension);
-
-      // 2. Read the file content
       const fileContent = isImage
-        ? fs.readFileSync(filePath) // Read binary data for images
-        : fs.readFileSync(filePath, "utf8"); // Read text data for other files
-
+        ? fs.readFileSync(filePath) // Binary data for images
+        : fs.readFileSync(filePath, "utf8"); // Text data for others
       const base64Content = Buffer.from(fileContent).toString("base64");
 
-      // 3. Get the file SHA (required for updating files)
       let fileSHA;
       try {
         const { data } = await octokit.repos.getContent({
@@ -72,7 +70,7 @@ async function pushChanges(filePaths, commitMessage) {
         }
       }
 
-      // 4. Create or update the file
+      // Create or update the file
       await octokit.repos.createOrUpdateFileContents({
         owner: OWNER,
         repo: REPO,
@@ -80,7 +78,7 @@ async function pushChanges(filePaths, commitMessage) {
         message: commitMessage,
         content: base64Content,
         branch: BRANCH,
-        sha: fileSHA, // Include SHA if file exists
+        sha: fileSHA,
       });
 
       console.log(`File ${filePath} committed and pushed successfully!`);
@@ -88,7 +86,90 @@ async function pushChanges(filePaths, commitMessage) {
       console.error(`Error pushing file ${filePath}:`, error.message);
     }
   }
+
+  // Process file deletions
+  for (const deletedPath of deletedPaths) {
+    try {
+      const { data } = await octokit.repos.getContent({
+        owner: OWNER,
+        repo: REPO,
+        path: deletedPath,
+        ref: BRANCH,
+      });
+
+      await octokit.repos.deleteFile({
+        owner: OWNER,
+        repo: REPO,
+        path: deletedPath,
+        message: commitMessage,
+        branch: BRANCH,
+        sha: data.sha,
+      });
+
+      console.log(`File ${deletedPath} deleted successfully!`);
+    } catch (error) {
+      if (error.status === 404) {
+        console.log(`File ${deletedPath} does not exist on GitHub. Nothing to delete.`);
+      } else {
+        console.error(`Error deleting file ${deletedPath}:`, error.message);
+      }
+    }
+  }
 }
+
+
+
+
+
+// async function pushChanges(filePaths, commitMessage) {
+//   for (const filePath of filePaths) {
+//     try {
+//       // 1. Determine file type (image or text)
+//       const fileExtension = path.extname(filePath).toLowerCase();
+//       const isImage = [".png", ".jpg", ".jpeg", ".gif"].includes(fileExtension);
+
+//       // 2. Read the file content
+//       const fileContent = isImage
+//         ? fs.readFileSync(filePath) // Read binary data for images
+//         : fs.readFileSync(filePath, "utf8"); // Read text data for other files
+
+//       const base64Content = Buffer.from(fileContent).toString("base64");
+
+//       // 3. Get the file SHA (required for updating files)
+//       let fileSHA;
+//       try {
+//         const { data } = await octokit.repos.getContent({
+//           owner: OWNER,
+//           repo: REPO,
+//           path: filePath,
+//           ref: BRANCH,
+//         });
+//         fileSHA = data.sha;
+//       } catch (error) {
+//         if (error.status === 404) {
+//           console.log(`File ${filePath} does not exist on GitHub. It will be created.`);
+//         } else {
+//           throw error;
+//         }
+//       }
+
+//       // 4. Create or update the file
+//       await octokit.repos.createOrUpdateFileContents({
+//         owner: OWNER,
+//         repo: REPO,
+//         path: filePath,
+//         message: commitMessage,
+//         content: base64Content,
+//         branch: BRANCH,
+//         sha: fileSHA, // Include SHA if file exists
+//       });
+
+//       console.log(`File ${filePath} committed and pushed successfully!`);
+//     } catch (error) {
+//       console.error(`Error pushing file ${filePath}:`, error.message);
+//     }
+//   }
+// }
 
 
 
@@ -419,8 +500,15 @@ fs.readFile(filePath, 'utf8', (err, data) => {
     }
    });
 
+   const filePaths = [
+    'index.html'
+   ]
 
-      pushChanges();
+   const deletedPaths = [
+    `${movieName.toLowerCase()}/index.html`
+   ]
+
+      pushChanges(filePaths, 'automated commit -r', deletedPaths);
 
 
   }

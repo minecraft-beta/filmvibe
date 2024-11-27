@@ -54,6 +54,7 @@ async function pushChanges(filePaths = [], commitMessage, deletedPaths = []) {
         : fs.readFileSync(filePath, "utf8"); // Text data for others
       const base64Content = Buffer.from(fileContent).toString("base64");
 
+      // Fetch the latest `sha` for the file
       let fileSHA;
       try {
         const { data } = await octokit.repos.getContent({
@@ -79,7 +80,7 @@ async function pushChanges(filePaths = [], commitMessage, deletedPaths = []) {
         message: commitMessage,
         content: base64Content,
         branch: BRANCH,
-        sha: fileSHA,
+        sha: fileSHA, // Use the latest SHA here
       });
 
       console.log(`File ${filePath} committed and pushed successfully!`);
@@ -117,6 +118,7 @@ async function pushChanges(filePaths = [], commitMessage, deletedPaths = []) {
     }
   }
 }
+
 
 
 // DB search function

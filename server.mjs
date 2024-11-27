@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 const filePath = './DB.txt';
 
-const psswd = 'psswd69';
+const psswd = process.env.PSSWD;
 
 //middlewares
 app.use(express.json());

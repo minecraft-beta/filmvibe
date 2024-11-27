@@ -6,16 +6,12 @@ document.getElementById('sendButton').addEventListener('click', () => {
   const imageInput = document.getElementById('imageInput');
   const para1 = document.getElementById('para1').value;
   const image1 = document.getElementById('image1');
-  const image2 = document.getElementById('image2');
-  const image3 = document.getElementById('image3');
-  const image4 = document.getElementById('image4');
-  
 
   const file = imageInput.files[0];
-  const file1 = image1.files[0]; 
-  const file2 = image2.files[0];
-  const file3 = image3.files[0];
-  const file4 = image4.files[0];
+  const file1 = image1.files[0];
+  const file2 = image1.files[1];
+  const file3 = image1.files[2];
+  const file4 = image1.files[3];
 
   if (!psswd) {
     alert('enter password');

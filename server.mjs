@@ -423,7 +423,7 @@ fs.readFile('index.html', 'utf8', (err, data) => {
   if (err) throw err;
 
 
-  const updatedData = data.replace(`id="${movieName}" class="divs"`, `id="${movieName}" class="d-none"`);
+  const updatedData = data.replace(`id="${movieName}" class="divs"`, `<!--id="${movieName}"--> class="d-none"`);
   
   fs.writeFile('index.html', updatedData, 'utf8', (err) => {
     if (err) throw err;
@@ -477,3 +477,4 @@ app.listen(PORT, () => {
 })
 
   
+ 

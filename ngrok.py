@@ -10,4 +10,4 @@ port = 6969
 public_url = ngrok.connect(port)
 print('Public URL:', public_url)
 
-os.system("node server.js")
+os.system("node server.mjs")

@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 
 
 import { Octokit } from "@octokit/rest";
+import { setTimeout } from 'timers';
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
@@ -443,18 +444,23 @@ fs.readFile(filePath, 'utf8', (err, data) => {
       console.log('deleted dir');
       res.send('done');
 
-      
+
       //git push
    const filePaths = [
-    'index.html',
-    'DB.txt'
+    'DB.txt',
+    'index.html'
    ]
 
    const deletedPaths = [
     `${movieName.toLowerCase()}/index.html`
    ]
 
-      pushChanges(filePaths, 'automated commit -r', deletedPaths);
+   pushChanges(filePaths, 'automated commit -r');
+
+   setTimeout(() => {
+    console.log("4ms delay completed");
+    pushChanges(undefined, 'automated commit -r', deletedPaths);
+  }, 4);  
 
     }
    });

@@ -442,9 +442,9 @@ fs.readFile(filePath, 'utf8', (err, data) => {
 
       console.log('deleted dir');
       res.send('done');
-    }
-   });
 
+      
+      //git push
    const filePaths = [
     'index.html',
     'DB.txt'
@@ -456,7 +456,8 @@ fs.readFile(filePath, 'utf8', (err, data) => {
 
       pushChanges(filePaths, 'automated commit -r', deletedPaths);
 
-
+    }
+   });
 
   }
 });

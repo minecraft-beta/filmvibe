@@ -475,6 +475,3 @@ fs.readFile(filePath, 'utf8', (err, data) => {
 app.listen(PORT, () => {
     console.log(`running on ${PORT}`);
 })
-
-  
- 

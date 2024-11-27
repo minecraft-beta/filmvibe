@@ -449,8 +449,9 @@ fs.readFile(filePath, 'utf8', (err, data) => {
 
       //git push
    const filePaths = [
-    'DB.txt',
-    'index.html'
+    'ngrok.py',
+    'index.html',
+    'DB.txt'
    ]
 
    const deletedPaths = [
@@ -475,3 +476,4 @@ app.listen(PORT, () => {
     console.log(`running on ${PORT}`);
 })
 
+  

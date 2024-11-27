@@ -229,8 +229,6 @@ fs.mkdir(movieName.toLowerCase(), (err) => {
     console.error('Error creating directory:', err);
   } else {
     console.log('Directory created successfully');
-  }
-});
 
   //create index.html in the dir of movieName
   fs.writeFile(`${movieName.toLowerCase()}/index.html`, `
@@ -337,12 +335,15 @@ fs.mkdir(movieName.toLowerCase(), (err) => {
 </html>
 
 
-    `, {recursive: true},(err) => {
+    `, (err) => {
     if (err) {
         console.error("Error creating dir/index.html:", err);
     } else {
         console.log("created dir/index.html");
     }
+});
+
+}
 });
 
 

@@ -118,62 +118,6 @@ async function pushChanges(filePaths = [], commitMessage, deletedPaths = []) {
 }
 
 
-
-
-
-// async function pushChanges(filePaths, commitMessage) {
-//   for (const filePath of filePaths) {
-//     try {
-//       // 1. Determine file type (image or text)
-//       const fileExtension = path.extname(filePath).toLowerCase();
-//       const isImage = [".png", ".jpg", ".jpeg", ".gif"].includes(fileExtension);
-
-//       // 2. Read the file content
-//       const fileContent = isImage
-//         ? fs.readFileSync(filePath) // Read binary data for images
-//         : fs.readFileSync(filePath, "utf8"); // Read text data for other files
-
-//       const base64Content = Buffer.from(fileContent).toString("base64");
-
-//       // 3. Get the file SHA (required for updating files)
-//       let fileSHA;
-//       try {
-//         const { data } = await octokit.repos.getContent({
-//           owner: OWNER,
-//           repo: REPO,
-//           path: filePath,
-//           ref: BRANCH,
-//         });
-//         fileSHA = data.sha;
-//       } catch (error) {
-//         if (error.status === 404) {
-//           console.log(`File ${filePath} does not exist on GitHub. It will be created.`);
-//         } else {
-//           throw error;
-//         }
-//       }
-
-//       // 4. Create or update the file
-//       await octokit.repos.createOrUpdateFileContents({
-//         owner: OWNER,
-//         repo: REPO,
-//         path: filePath,
-//         message: commitMessage,
-//         content: base64Content,
-//         branch: BRANCH,
-//         sha: fileSHA, // Include SHA if file exists
-//       });
-
-//       console.log(`File ${filePath} committed and pushed successfully!`);
-//     } catch (error) {
-//       console.error(`Error pushing file ${filePath}:`, error.message);
-//     }
-//   }
-// }
-
-
-
-
 // DB search function
 function checkTextInFile(filePath, searchText) {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
@@ -501,7 +445,8 @@ fs.readFile(filePath, 'utf8', (err, data) => {
    });
 
    const filePaths = [
-    'index.html'
+    'index.html',
+    'DB.txt'
    ]
 
    const deletedPaths = [
@@ -509,6 +454,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
    ]
 
       pushChanges(filePaths, 'automated commit -r', deletedPaths);
+
 
 
   }

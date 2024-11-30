@@ -423,7 +423,21 @@ fs.readFile('index.html', 'utf8', (err, data) => {
   if (err) throw err;
 
 
-  const updatedData = data.replace(`id="${movieName}" class="divs"`, `<!--id="${movieName}"--> class="d-none"`);
+  const betichod1 = `<div id=${movieName}" class="divs">
+   <img class="imgs"/>
+    <h2 class="hd1"></h2>
+    <p class="p1"></p>
+    <button class="btn" onclick="window.location.href='${movieName}/'">Download</button>
+  </div>`;
+
+  const betichod2 = `<div id=${movieName}" class="divs">
+   <img class="d-none"/>
+    <h2 class="d-none"></h2>
+    <p class="d-none"></p>
+    <button class="d-none" onclick="window.location.href='${movieName}/'">Download</button>
+  </div>`;
+  
+  const updatedData = data.replace(betichod1, betichod2);
   
   fs.writeFile('index.html', updatedData, 'utf8', (err) => {
     if (err) throw err;

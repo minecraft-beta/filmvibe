@@ -22,12 +22,18 @@ burger.addEventListener('change', function () {
   const divs = document.getElementsByClassName('divs');
   
   searchIcon.onclick = () => {
-    
-    
+  
   const searchBarValue = document.getElementById('searchBar').value;
 
   if (!searchBarValue) {
     console.log('nothing');
+
+    let i = 0;
+    while (i < divs.length) {
+      divs[i].style.display = 'block';
+      i++;
+    }
+
   } else {
 
     // hide all movies
@@ -86,6 +92,13 @@ burger.addEventListener('change', function () {
 
   if (!searchBarValue) {
     console.log('nothing');
+
+    let i = 0;
+    while (i < divs.length) {
+      divs[i].style.display = 'block';
+      i++;
+    }
+
   } else {
 
     // hide all movies
@@ -148,6 +161,13 @@ searchBar.addEventListener("keydown", (event) => {
 
   if (!searchBarValue) {
     console.log('nothing');
+
+    let i = 0;
+    while (i < divs.length) {
+      divs[i].style.display = 'block';
+      i++;
+    }
+
   } else {
 
     // hide all movies

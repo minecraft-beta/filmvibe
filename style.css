@@ -26,6 +26,14 @@ body {
 }
 
 
+.ft2 {
+  color: white;
+  font-size: 15px;
+  position: fixed;
+  left: 12%;
+  bottom: 4%;
+}
+
 /* From Uiverse.io */ 
 .grid {
   height: 100vh; /* Ensures the grid covers the full viewport height */
@@ -525,4 +533,4 @@ body {
 
 .d-none {
   display: none;
-}
+} 

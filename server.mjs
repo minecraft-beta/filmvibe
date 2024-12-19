@@ -209,12 +209,11 @@ fs.readFile('index.html', 'utf8', (err, data) => {
   if (err) throw err;
   
   const divContent = `
-  <div id="${movieName}" class="divs">
+  <div id="${movieName}" class="divs" onclick="window.location.href='${movieName.toLowerCase()}/'">
    <img class="imgs" src="uploads/${movieImage}.png"/>
     <h2 class="hd1">${movieName}</h2>
     <p class="p1">${movieDescription}</p>
-    <button class="btn" onclick="window.location.href='${movieName.toLowerCase()}/'">Download</button>
-  </div>
+      </div>
   `;
 
   const updatedData = data.replace('<script src', `${divContent}\n<script src`);
